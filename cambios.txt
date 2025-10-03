@@ -1,0 +1,17 @@
+Cambios
+se cambia en el register.jsx el axios para que da error con mensaje de mail ya registrado
+de data.mesage se cambia a data.error para tomar los errores
+
+se mofica mi profile.jsx ya que me devolvia un objeto y no un arreglo
+
+const getDeveloperData = () => {
+    const token = window.sessionStorage.getItem('token')
+    axios.get(ENDPOINT.users, { headers: { Authorization: `Bearer ${token}` } })
+      .then(({ data: [user] }) => setDeveloper({ ...user }))
+      .catch(({ response: { data } }) => {
+        console.error(data)
+        window.sessionStorage.removeItem('token')
+        setDeveloper(null)
+        navigate('/')
+      })
+  }
